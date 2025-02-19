@@ -1,6 +1,10 @@
 import streamlit as st
 import openai
 import os
+from dotenv import load_dotenv
+
+load_dotenv()  # Last .env-filen, den bør ligge i prosjektmappen
+
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def hent_gpt_svar(prompt):
