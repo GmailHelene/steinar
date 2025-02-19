@@ -21,27 +21,6 @@ def hent_gpt_svar(prompt):
         return f"Feil ved henting av GPT-svar: {str(e)}"
 
 # Testkall (for eksempel, kan fjernes i produksjon)
-test_prompt = "Beskriv hvordan jeg kan identifisere obsidian."
-print(hent_gpt_svar(test_prompt))
-    """
-    Forsøker å kalle openai.ChatCompletion.create (eksisterte i openai==0.28, 
-    men var eksperimentelt). Du kan måtte bytte til 'gpt-3.5-turbo' 
-    om 'gpt-4' ikke fungerer i 0.28.
-    """
-    try:
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",  # Evt. "gpt-4" om du har tilgang, men usikkert i 0.28
-            messages=[
-                {"role": "system", "content": "Du er en ekspert på steinidentifikasjon."},
-                {"role": "user", "content": prompt}
-            ]
-        )
-        # Returner svaret fra første "choice"
-        return response["choices"][0]["message"]["content"]
-    except Exception as e:
-        return f"Feil ved henting av GPT-svar: {str(e)}"
-
-# Test kall (i terminalen) - fjern eller kommenter ut hvis du ikke vil teste i Streamlit
 if __name__ == "__main__":
     test_prompt = "Beskriv hvordan jeg kan identifisere obsidian."
     svar = hent_gpt_svar(test_prompt)
