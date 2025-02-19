@@ -89,7 +89,7 @@ elif valg == "Velge en bestemt kategori":
         st.success("Ferdig!")
         st.text_area("Resultat", value=svar, height=300)
 
-st.markdown("**Merk:** Denne koden er ment for openai==0.28, og ChatCompletion var eksperimentell i den versjonen.")
+st.markdown("")
 
 
 ### Viktig:
