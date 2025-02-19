@@ -1,11 +1,10 @@
-import streamlit as st
 import openai
 import os
-from dotenv import load_dotenv
 
-load_dotenv()  # Last .env-filen, den bør ligge i prosjektmappen
-
+# Hent API-nøkkelen fra miljøvariabelen. For produksjon må du sette denne variabelen på serveren eller i din hosting-konfigurasjon.
 openai.api_key = os.getenv("OPENAI_API_KEY")
+if not openai.api_key:
+    raise ValueError("Ingen API-nøkkel funnet. Vennligst sett miljøvariabelen OPENAI_API_KEY.")
 
 def hent_gpt_svar(prompt):
     """
