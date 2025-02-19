@@ -1,3 +1,4 @@
+import streamlit as st
 import openai
 import os
 
@@ -7,6 +8,21 @@ if not openai.api_key:
     raise ValueError("Ingen API-nøkkel funnet. Vennligst sett miljøvariabelen OPENAI_API_KEY.")
 
 def hent_gpt_svar(prompt):
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",  # Juster modell etter hva som støttes i openai==0.28
+            messages=[
+                {"role": "system", "content": "Du er en ekspert på steinidentifikasjon."},
+                {"role": "user", "content": prompt}
+            ]
+        )
+        return response["choices"][0]["message"]["content"]
+    except Exception as e:
+        return f"Feil ved henting av GPT-svar: {str(e)}"
+
+# Testkall (for eksempel, kan fjernes i produksjon)
+test_prompt = "Beskriv hvordan jeg kan identifisere obsidian."
+print(hent_gpt_svar(test_prompt))
     """
     Forsøker å kalle openai.ChatCompletion.create (eksisterte i openai==0.28, 
     men var eksperimentelt). Du kan måtte bytte til 'gpt-3.5-turbo' 
